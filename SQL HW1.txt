@@ -1,0 +1,10 @@
+SELECT 
+	Employees.FirstName AS Employee_FirstName,
+        Employees.LastName AS Employee_LastName,
+	COUNT(Orders.OrderID) AS Number_of_Orders
+FROM Orders
+JOIN Employees ON Orders.EmployeeID = Employees.EmployeeID
+GROUP BY Employees.EmployeeID
+ORDER BY Number_of_Orders DESC
+LIMIT 10
+        

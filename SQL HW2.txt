@@ -1,0 +1,18 @@
+SELECT Employee_FirstName,
+       Employee_LastName,
+       SUM(Quantity) Total_Quantity
+FROM 
+	(
+	SELECT Employees.FirstName AS Employee_FirstName,
+    		Employees.lastname AS Employee_LastName, 
+            	orders.orderID, 
+           	orderdetails.Quantity
+	 FROM Orders
+	 JOIN Employees ON Orders.EmployeeID = Employees.EmployeeID
+	 JOIN OrderDetails ON Orders.OrderID= OrderDetails.orderID
+	 JOIN Products on Products.ProductID= OrderDetails.ProductID
+	 JOIN Categories on Categories.categoryID = Products.categoryID
+	 WHERE Categories.CategoryName= 'Beverages'
+	)
+GROUP BY Employee_FirstName, Employee_LastName
+ORDER BY Total_quantity DESC
